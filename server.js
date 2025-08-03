@@ -1,4 +1,5 @@
 const express = require("express");
+const globalErrHandler = require("./middlewares/globalErrHandler");
 require("dotenv").config();
 require("./config/dbconnection");
 const app = express();
@@ -11,6 +12,7 @@ const app = express();
 app.use(express.json());
 //routes
 //error handlers
+app.use(globalErrHandler);
 
 
 //listen to the server

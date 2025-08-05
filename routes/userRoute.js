@@ -1,5 +1,7 @@
 const express = require('express');
-const { signupCtrl, signinCtrl, allUsers, getProfile, updateUser, deleteUser } = require('../controllers/userController');
+const { signupCtrl, signinCtrl, allUsers, getProfile, updateUser, deleteUser, makeHotelManager, makeAdmin } = require('../controllers/userController');
+const isLoggedIn = require('../middlewares/isLoggedIn');
+const isAdmin = require('../middlewares/isAdmin');
 
 
 const userRouter = express.Router();
@@ -18,6 +20,12 @@ userRouter.get('/', allUsers);
 
 //PUT/api/v1/users/:id
 userRouter.put('/:id', updateUser);
+
+//PUT/api/v1/users/:id
+userRouter.put('/:id', isLoggedIn, isAdmin, makeHotelManager);
+
+//PUT/api/v1/users/:id
+userRouter.put('/:id', isLoggedIn, isAdmin, makeAdmin)
 
 //DELETE/api/v1/users/:id
 userRouter.delete('/:id', deleteUser);

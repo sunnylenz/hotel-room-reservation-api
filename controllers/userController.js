@@ -112,6 +112,44 @@ const deleteUser = async (req, res, next) => {
     } catch (error) {
         next(new ErrorResponse(error.message));
     }
+};
+
+const makeAdmin = async (req, res, next) => {
+    try {
+        //get the user
+        const user = await User.findById(req.params.id);
+        // check if user exists
+        if (!user) {
+            return next(new ErrorResponse("User does not exist"));
+        }
+        if (user.role === 'Admin') {
+            return next(new ErrorResponse("User is already an admin"));
+        }
+
+        user.role = "Admin";
+        user.isAdmin = true;
+        await user.save();
+
+    } catch (error) {
+        next(new ErrorResponse(error.message));
+    }
+};
+
+const makeHotelManager = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return next(new ErrorResponse("User does not exist", 403));
+        }
+        if (user.role === 'Hotel_Manager') {
+            return next(new ErrorResponse("User is already a hotel Manager"));
+        }
+
+        user.role = "Hotel_Manager";
+        await user.save();
+    } catch (error) {
+        next(new ErrorResponse(error.message));
+    }
 }
 
 module.exports = {
@@ -121,4 +159,7 @@ module.exports = {
     getProfile,
     updateUser,
     deleteUser,
+    makeAdmin,
+    makeHotelManager,
+
 }

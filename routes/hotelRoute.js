@@ -7,7 +7,7 @@ const authRoles = require('../middlewares/authRoles');
 const hotelRouter = express.Router();
 
 //POST/api/v1/hotels
-hotelRouter.post('/', isLoggedIn, authRoles(['Hotel_manager', 'Admin']), createHotel);
+hotelRouter.post('/', isLoggedIn, authRoles(["Admin", "Hotel_Manager"]), createHotel);
 
 //GET/api/v1/hotels/:id
 hotelRouter.get('/:id', getHotel);

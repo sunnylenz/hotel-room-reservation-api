@@ -83,7 +83,7 @@ const allUsers = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
     try {
         const user = await User.findById(req.authUser);
-        req.json({
+        res.json({
             status: 'success',
             data: user,
         });
@@ -130,6 +130,11 @@ const makeAdmin = async (req, res, next) => {
         user.isAdmin = true;
         await user.save();
 
+        res.json({
+            status: "success",
+            data: user,
+        });
+
     } catch (error) {
         next(new ErrorResponse(error.message));
     }
@@ -147,6 +152,11 @@ const makeHotelManager = async (req, res, next) => {
 
         user.role = "Hotel_Manager";
         await user.save();
+
+        res.json({
+            status: "success",
+            data: user,
+        });
     } catch (error) {
         next(new ErrorResponse(error.message));
     }

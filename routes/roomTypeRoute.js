@@ -7,10 +7,10 @@ const authRoles = require('../middlewares/authRoles');
 const roomTypeRouter = express.Router();
 
 //POST/api/v1/room-types
-roomTypeRouter.post('/', isLoggedIn, authRoles(['Hotel_Manager', 'Admin']), createRoomType);
+roomTypeRouter.post('/', isLoggedIn, authRoles(["Hotel_Manager", "Admin"]), createRoomType);
 
 //GET/api/v1/room-types
-roomTypeRouter.get('/', allRoomTypes);
+roomTypeRouter.get('/', isLoggedIn, allRoomTypes);
 
 //PUT/api/v1/room-types
 roomTypeRouter.put('/:id', isLoggedIn, authRoles(['Hotel_Manager', 'Admin']), updateRoomType);

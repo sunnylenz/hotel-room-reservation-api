@@ -1,4 +1,6 @@
 const express = require("express");
+require("./config/dbconnection");
+require("dotenv").config();
 const globalErrHandler = require("./middlewares/globalErrHandler");
 const ErrorResponse = require("./utils/errorResponse");
 const userRouter = require("./routes/userRoute");
@@ -7,8 +9,6 @@ const hotelRouter = require("./routes/hotelRoute");
 const bookingRouter = require("./routes/bookingRoute");
 const roomTypeRouter = require("./routes/roomTypeRoute");
 const reviewRouter = require("./routes/reviewRoutes");
-require("dotenv").config();
-//require("./config/dbconnection");
 
 const app = express();
 

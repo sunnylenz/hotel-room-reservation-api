@@ -5,11 +5,6 @@ const ErrorResponse = require("../utils/errorResponse");
 const createRoomType = async (req, res, next) => {
     const { name, description, basePrice, defaultAmenities } = req.body;
     try {
-        //find the user
-        // const user = await User.findById(req.authUser);
-        // if (!user) {
-        //     return next(new ErrorResponse("user does not exist"));
-        // }
         const roomType = await RoomType.create({
             name,
             description,
@@ -83,7 +78,7 @@ const deleteRoomType = async (req, res, next) => {
             data: 'Roomtype deleted successfully',
         });
     } catch (error) {
-        next(new ErrorResponse(error.message))
+        next(new ErrorResponse(error.message));
     }
 }
 

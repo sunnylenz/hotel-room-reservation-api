@@ -38,7 +38,9 @@ const signupCtrl = async (req, res, next) => {
 const signinCtrl = async (req, res, next) => {
     const { email, password } = req.body;
     try {
-
+        if (!email || !password) {
+            return next(new ErrorResponse('Please provide an email and password', 400));
+        }
         //check if email exists
         const userExist = await User.findOne({ email });
         if (!userExist) {
